@@ -1,0 +1,224 @@
+:root {
+  color-scheme: dark;
+  --bg: #07111f;
+  --bg-soft: #0f1b2e;
+  --panel: rgba(15, 27, 46, 0.82);
+  --panel-border: rgba(148, 163, 184, 0.18);
+  --text: #e5eefb;
+  --muted: #9fb2cc;
+  --primary: #62d6ff;
+  --primary-strong: #2ea9ff;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --radius: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(46, 169, 255, 0.22), transparent 30%),
+    radial-gradient(circle at top right, rgba(98, 214, 255, 0.16), transparent 28%),
+    linear-gradient(180deg, #07111f 0%, #0b1424 100%);
+}
+
+.page-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.hero {
+  padding: 56px 32px;
+  border: 1px solid var(--panel-border);
+  border-radius: calc(var(--radius) + 6px);
+  background: linear-gradient(135deg, rgba(98, 214, 255, 0.12), rgba(46, 169, 255, 0.08)), var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.hero__badge,
+.section__eyebrow {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid rgba(98, 214, 255, 0.26);
+  border-radius: 999px;
+  color: var(--primary);
+  background: rgba(98, 214, 255, 0.08);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 18px 0 14px;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  line-height: 1.05;
+}
+
+.hero__lead {
+  max-width: 780px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 132px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button--primary {
+  color: #03111c;
+  background: linear-gradient(135deg, var(--primary), #8ef0ff);
+}
+
+.button--secondary {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--panel-border);
+}
+
+.content {
+  margin-top: 24px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card,
+.section {
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.card {
+  padding: 24px;
+}
+
+.card h2,
+.section h2 {
+  margin: 0 0 14px;
+  font-size: 1.4rem;
+}
+
+.card p,
+.section p,
+.feature-item p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.section {
+  margin-top: 22px;
+  padding: 28px;
+}
+
+.section__header {
+  margin-bottom: 18px;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.feature-item {
+  padding: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.feature-item h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.code-panel {
+  overflow-x: auto;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 18px;
+  background: #06101b;
+}
+
+.code-panel pre {
+  margin: 0;
+  padding: 22px;
+}
+
+.code-panel code {
+  color: #d7e9ff;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.section__note {
+  margin-top: 16px;
+}
+
+.section--footer {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .card-grid,
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+
+  .hero,
+  .section,
+  .card {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 20px, 1120px);
+    padding-top: 18px;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+}

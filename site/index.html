@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agentic RAG | 项目主页</title>
+    <meta
+      name="description"
+      content="Agentic RAG 项目主页：展示系统能力、架构设计、项目结构与本地运行方式。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero__badge">GitHub Pages Project Site</div>
+        <h1>Agentic RAG</h1>
+        <p class="hero__lead">
+          一个支持多格式文档解析、向量检索、证据展示与 Agent 多轮检索问答的课程项目。
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="https://github.com/hrtttrt" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="button button--secondary" href="#run-local">本地运行</a>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="card-grid">
+          <article class="card">
+            <h2>项目目标</h2>
+            <p>
+              面向课程场景实现一个可扩展的 Agentic RAG 系统，支持知识库构建、检索增强问答、证据展示，以及多轮问题分解与回答生成。
+            </p>
+          </article>
+          <article class="card">
+            <h2>在线部署说明</h2>
+            <p>
+              当前网页通过 GitHub Actions 自动部署到 GitHub Pages，用于展示项目介绍、架构和使用方式。
+              由于 GitHub Pages 仅支持静态页面，仓库中的 Streamlit 应用需要部署到其他支持 Python 的平台。
+            </p>
+          </article>
+          <article class="card">
+            <h2>核心技术</h2>
+            <p>
+              LangGraph、LangChain、Chroma、Sentence Transformers、Streamlit、OpenAI Compatible API。
+            </p>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section__header">
+            <span class="section__eyebrow">Features</span>
+            <h2>主要能力</h2>
+          </div>
+          <div class="feature-list">
+            <div class="feature-item">
+              <h3>多格式文档接入</h3>
+              <p>支持 txt、md、pdf、doc/docx、xlsx、ppt/pptx 等常见文档格式。</p>
+            </div>
+            <div class="feature-item">
+              <h3>知识库构建</h3>
+              <p>支持文档解析、切分、Embedding 生成与向量库写入。</p>
+            </div>
+            <div class="feature-item">
+              <h3>Agent 多轮检索</h3>
+              <p>能够执行问题分析、子问题拆解、多轮检索与结果整合。</p>
+            </div>
+            <div class="feature-item">
+              <h3>证据可视化</h3>
+              <p>展示召回片段、引用来源和执行状态，便于评估回答质量。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section__header">
+            <span class="section__eyebrow">Architecture</span>
+            <h2>项目结构</h2>
+          </div>
+          <div class="code-panel">
+<pre><code>app/
+├─ agent/       # Agent 图、节点、状态、提示词
+├─ config/      # 配置与日志
+├─ loaders/     # 多格式文档加载器
+├─ rag/         # Embedding、切分、检索、向量库
+├─ services/    # 知识库构建与问答服务
+└─ ui/          # Streamlit 界面
+
+data/
+└─ knowledge_base/
+   ├─ raw/      # 本地知识库原始文档（默认不提交）
+   └─ processed/
+
+site/
+└─ GitHub Pages 项目主页</code></pre>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section__header">
+            <span class="section__eyebrow">Run</span>
+            <h2 id="run-local">本地运行</h2>
+          </div>
+          <div class="code-panel">
+<pre><code>python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app/ui/streamlit_app.py</code></pre>
+          </div>
+          <p class="section__note">
+            运行前请在本地配置 `.env`，并准备好知识库文档与所需 API Key。`.env`、原始文档、模型与向量库均建议保留在本地，不提交到 GitHub。
+          </p>
+        </section>
+
+        <section class="section section--footer">
+          <div>
+            <span class="section__eyebrow">Note</span>
+            <h2>后续可扩展内容</h2>
+            <p>
+              你可以继续在这个项目主页中补充系统架构图、实验结果、答辩材料、性能评测，或添加一个跳转到在线 Demo 的按钮。
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

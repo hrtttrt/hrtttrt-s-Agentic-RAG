@@ -53,7 +53,7 @@ checkpoints/
 # Optional local app state
 .streamlit/secrets.toml
 
-# Local documents and website content not for GitHub
+# Local documents and legacy website content not for GitHub
 hrtttrt.github.io/
 API key.txt
 测试.txt
