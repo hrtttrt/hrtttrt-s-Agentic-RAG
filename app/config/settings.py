@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from typing import Literal
 
@@ -6,6 +7,30 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 BASE_DIR = Path(__file__).resolve().parents[2]
+STREAMLIT_SECRETS_PATH = BASE_DIR / ".streamlit" / "secrets.toml"
+
+
+def _load_streamlit_secrets() -> None:
+    if not STREAMLIT_SECRETS_PATH.exists():
+        return
+
+    try:
+        import tomllib
+
+        secret_values = tomllib.loads(STREAMLIT_SECRETS_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return
+
+    for key, value in secret_values.items():
+        env_key = str(key).upper()
+        if isinstance(value, dict):
+            for nested_key, nested_value in value.items():
+                os.environ.setdefault(str(nested_key).upper(), str(nested_value))
+            continue
+        os.environ.setdefault(env_key, str(value))
+
+
+_load_streamlit_secrets()
 
 
 class Settings(BaseSettings):
@@ -43,5 +68,12 @@ class Settings(BaseSettings):
     max_agent_iterations: int = 3
     enable_ragas_eval: bool = True
 
+    def ensure_runtime_directories(self) -> None:
+        self.vector_db_path.mkdir(parents=True, exist_ok=True)
+        self.knowledge_base_dir.mkdir(parents=True, exist_ok=True)
+        self.processed_data_dir.mkdir(parents=True, exist_ok=True)
+        self.reports_dir.mkdir(parents=True, exist_ok=True)
+
 
 settings = Settings()
+settings.ensure_runtime_directories()

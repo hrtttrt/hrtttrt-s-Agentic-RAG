@@ -18,12 +18,20 @@ class RAGTools:
     def __init__(self) -> None:
         self.loader_router = LoaderRouter()
         self.splitter = DocumentSplitter()
-        self.embedding_service = EmbeddingService()
-        self.vector_store = ChromaVectorStore()
-        self.retriever = Retriever(
-            embedding_service=self.embedding_service,
-            vector_store=self.vector_store,
-        )
+        self.embedding_service: EmbeddingService | None = None
+        self.vector_store: ChromaVectorStore | None = None
+        self.retriever: Retriever | None = None
+
+    def _ensure_runtime(self) -> None:
+        if self.embedding_service is None:
+            self.embedding_service = EmbeddingService()
+        if self.vector_store is None:
+            self.vector_store = ChromaVectorStore()
+        if self.retriever is None:
+            self.retriever = Retriever(
+                embedding_service=self.embedding_service,
+                vector_store=self.vector_store,
+            )
 
     def load_documents(self, paths: list[str | Path]) -> list[RawDocument]:
         documents: list[RawDocument] = []
@@ -43,6 +51,9 @@ class RAGTools:
     def index_documents(self, chunks: list[ChunkDocument]) -> int:
         if not chunks:
             return 0
+        self._ensure_runtime()
+        assert self.embedding_service is not None
+        assert self.vector_store is not None
         embeddings = self.embedding_service.embed_documents([chunk.content for chunk in chunks])
         self.vector_store.add_chunks(chunks, embeddings)
         return len(chunks)
@@ -58,6 +69,8 @@ class RAGTools:
         top_k: int | None = None,
         filters: MetadataFilters | None = None,
     ) -> list[RetrievalResult]:
+        self._ensure_runtime()
+        assert self.retriever is not None
         return self.retriever.search(query=query, top_k=top_k, filters=filters)
 
     @staticmethod

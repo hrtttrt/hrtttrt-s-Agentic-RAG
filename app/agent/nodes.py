@@ -7,7 +7,14 @@ from app.rag.schema import RetrievalResult
 from app.rag.tools import RAGTools
 
 
-rag_tools = RAGTools()
+_rag_tools: RAGTools | None = None
+
+
+def get_rag_tools() -> RAGTools:
+    global _rag_tools
+    if _rag_tools is None:
+        _rag_tools = RAGTools()
+    return _rag_tools
 
 
 FOCUS_SUFFIXES = {
@@ -64,7 +71,7 @@ def plan_retrieval(state: AgentState) -> AgentState:
 
 def retrieve_evidence(state: AgentState) -> AgentState:
     current_query = state.get("current_query") or state["query"]
-    docs = rag_tools.retrieve(current_query)
+    docs = get_rag_tools().retrieve(current_query)
     evidence_pool = _dedupe_results(list(state.get("evidence_pool", [])) + docs)
     iteration_count = state.get("iteration_count", 0) + 1
     subqueries = state.get("subqueries") or [state["query"]]
@@ -119,7 +126,7 @@ def synthesize_answer(state: AgentState) -> AgentState:
             return {**state, "final_answer": structured_answer, "citations": citations}
 
     llm = get_llm_provider()
-    evidence_text = rag_tools.format_snippets(state.get("evidence_pool", []))
+    evidence_text = get_rag_tools().format_snippets(state.get("evidence_pool", []))
     prompt = ANSWER_PROMPT_TEMPLATE.format(
         query=state["query"],
         evidence=evidence_text,
