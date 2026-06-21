@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# OS / IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Build outputs
+build/
+dist/
+
+# Local data and generated artifacts
+chroma_db/
+reports/
+data/knowledge_base/processed/
+
+# Large local models / caches
+models/
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+.huggingface/
+.cache/
+
+# Optional local app state
+.streamlit/secrets.toml
+
+# Local documents and website content not for GitHub
+hrtttrt.github.io/
+API key.txt
+测试.txt
+测试文档/
+data/knowledge_base/raw/
+MULTIHOP_ISSUES_AND_SOLUTIONS.md
+实现目标.md
+技术方案.md
