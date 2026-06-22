@@ -55,10 +55,12 @@ checkpoints/
 
 # Local documents and legacy website content not for GitHub
 hrtttrt.github.io/
-API key.txt
-测试.txt
 测试文档/
 data/knowledge_base/raw/
-MULTIHOP_ISSUES_AND_SOLUTIONS.md
-实现目标.md
-技术方案.md
+
+# Documents: only README.md and requirements.txt are tracked
+*.md
+!README.md
+
+*.txt
+!requirements.txt
